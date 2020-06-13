@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import style from "./select.module.css";
 
 const Origin = () => (
   <select>
@@ -19,7 +20,7 @@ const MyOption = ({
   selected: boolean
   value: string
 }) => {
-  const className = selected ? 'option selected' : 'option'
+  const className = selected ? `${style.option} ${style.selected}` : style.option
   return (
     <li
       onClick={(e) => {
@@ -88,7 +89,7 @@ export const MySelect = ({ options = [] }: { options?: string[] }) => {
         onClick={() => {
           isOpen(true)
         }}
-        className="select"
+        className={style.select}
         tabIndex={0}
         onBlur={() => (timeoutId = setTimeout(() => isOpen(false)))}
         onFocus={() => timeoutId && clearTimeout(timeoutId)}
@@ -98,12 +99,12 @@ export const MySelect = ({ options = [] }: { options?: string[] }) => {
         aria-activedescendant={selectedId ? selectedId : ''}
         aria-controls="ex1-listbox"
       >
-        <div className="select_label" tabIndex={0} onKeyDown={keyDown}>
+        <div tabIndex={0} onKeyDown={keyDown}>
           {options[selectedIndex]}
           <span aria-hidden="true">▼</span>
         </div>
         {open && (
-          <ul className="options" role="listbox">
+          <ul className={style.options} role="listbox">
             {options.map((option, i) => (
               <MyOption
                 key={i}

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import style from './ring-command.module.css';
 
 const MyOption = ({
   select,
@@ -11,7 +12,7 @@ const MyOption = ({
   value: string
   transform: string
 }) => {
-  const className = selected ? 'ring-option ring-selected' : 'ring-option'
+  const className = selected ? `${style.option} ${style.selected}` : style.option
   return (
     <g
       transform={transform}
@@ -105,7 +106,7 @@ export const RingCommand = ({ options = [] }: { options?: string[] }) => {
         }}
         width="400"
         height="400"
-        className="ring-select"
+        className={style.select}
         tabIndex={0}
         onBlur={() => (timeoutId = setTimeout(() => isOpen(false)))}
         onFocus={() => timeoutId && clearTimeout(timeoutId)}
